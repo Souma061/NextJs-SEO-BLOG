@@ -22,9 +22,9 @@ Below are the results of the production Lighthouse performance and SEO audit. Th
 | Best Practices | 100   |
 | SEO            | 100   |
 
-![Lighthouse Audit](public/screenshots/lighthouse-report.png)
+![Lighthouse Audit](/public/screenshots/lighthouse_audit.jpg)
 
-_(Note: Please ensure your audit screenshots are placed in `public/screenshots/`)_
+
 
 ## 🔍 Search and Filter Implementation
 
