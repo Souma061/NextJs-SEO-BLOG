@@ -1,12 +1,16 @@
 "use client";
 
 import { Search } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { BlogPost } from "../../types";
-import ArticleModal from "./ArticleModal";
 import BlogCard from "./BlogCard";
 import CategoryFilter from "./CategoryFilter";
 import SearchBar from "./SearchBar";
+
+const ArticleModal = dynamic(() => import("./ArticleModal"), {
+  ssr: false,
+});
 
 interface BlogGridProps {
   blogs: BlogPost[];
@@ -55,7 +59,7 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
             <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-1">No articles found</h3>
             <p className="text-gray-500">
-              Try adjusting your search or filters to find what you're looking for.
+              Try adjusting your search or filters to find what you&apos;re looking for.
             </p>
           </div>
         </div>
@@ -65,15 +69,16 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
             <h2 className="text-2xl font-bold text-gray-900">
               {selectedCategory || "Latest Stories"}
             </h2>
-            <p className="text-sm font-medium text-gray-400">
+            <p className="text-sm font-medium text-gray-500">
               {filteredBlogs.length} results
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {filteredBlogs.map((blog) => (
+            {filteredBlogs.map((blog, index) => (
               <BlogCard
                 key={blog.id}
                 blog={blog}
+                priority={index < 3}
                 onClick={() => setSelectedArticle(blog)}
               />
             ))}

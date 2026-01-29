@@ -6,9 +6,10 @@ import { formatDate } from "../../lib/utils";
 interface BlogCardProps {
   blog: BlogPost;
   onClick: () => void;
+  priority?: boolean;
 }
 
-export default function BlogCard({ blog, onClick }: BlogCardProps) {
+export default function BlogCard({ blog, onClick, priority }: BlogCardProps) {
   return (
     <article
       onClick={onClick}
@@ -21,11 +22,12 @@ export default function BlogCard({ blog, onClick }: BlogCardProps) {
         }
       }}
     >
-      <div className="relative h-60 w-full rounded-2xl overflow-hidden">
+      <div className="relative h-60 w-full rounded-2xl overflow-hidden bg-gray-100">
         <Image
           src={blog.photo_url || "/placeholder.png"}
           alt={blog.title}
           fill
+          priority={priority}
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 100vw, (max-width:1200px) 50vw, 33vw"
         />
@@ -36,7 +38,7 @@ export default function BlogCard({ blog, onClick }: BlogCardProps) {
         </div>
       </div>
       <div className="p-5">
-        <div className="flex items-center gap-2 text-gray-400 text-xs mb-3 font-medium">
+        <div className="flex items-center gap-2 text-gray-500 text-xs mb-3 font-medium">
           <Clock className="w-3.5 h-3.5" />
           <time dateTime={blog.created_at}>{formatDate(blog.created_at)}</time>
         </div>

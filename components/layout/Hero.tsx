@@ -10,7 +10,7 @@ export default function Hero() {
         <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
           Insights for the <span className="text-blue-600">Modern Digital</span> World
         </h1>
-        <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
           Explore expert perspectives on technology, business strategy, and the future of digital marketing.
         </p>
       </div>

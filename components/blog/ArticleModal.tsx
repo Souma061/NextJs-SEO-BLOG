@@ -34,6 +34,28 @@ export default function ArticleModal({ article, onClose }: ArticleModalProps) {
     }
   };
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    image: article.photo_url,
+    datePublished: article.created_at,
+    dateModified: article.updated_at,
+    author: {
+      "@type": "Person",
+      name: "SEO Blog Author",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "SEO Blog",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://your-seo-blog.vercel.app/logo.png",
+      },
+    },
+  };
+
   return (
     <div
       ref={modalRef}
@@ -43,10 +65,14 @@ export default function ArticleModal({ article, onClose }: ArticleModalProps) {
       aria-modal="true"
       aria-labelledby="modal-title"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="bg-white rounded-[2rem] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 bg-white/80 backdrop-blur-md hover:bg-white rounded-full text-gray-400 hover:text-gray-900 shadow-sm border border-gray-100 z-20 transition-all"
+          className="absolute top-6 right-6 p-2 bg-white/80 backdrop-blur-md hover:bg-white rounded-full text-gray-500 hover:text-gray-900 shadow-sm border border-gray-100 z-20 transition-all"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -59,12 +85,13 @@ export default function ArticleModal({ article, onClose }: ArticleModalProps) {
             fill
             className="object-cover"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width:1200px) 70vw, 800px"
           />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
         </div>
 
         <article className="px-8 pb-12 -mt-16 relative z-10">
-          <div className="flex flex-wrap gap-4 items-center mb-8 text-sm font-semibold text-gray-500">
+          <div className="flex flex-wrap gap-4 items-center mb-8 text-sm font-semibold text-gray-600">
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full">
               <Tag className="w-3.5 h-3.5" />
               <span>{article.category}</span>
@@ -83,10 +110,10 @@ export default function ArticleModal({ article, onClose }: ArticleModalProps) {
             {article.content_html ? (
               <div
                 dangerouslySetInnerHTML={{ __html: article.content_html }}
-                className="text-gray-600 leading-talk text-lg"
+                className="text-gray-600 leading-relaxed text-lg"
               />
             ) : (
-              <p className="text-gray-600 leading-talk text-lg">
+              <p className="text-gray-600 leading-relaxed text-lg">
                 {article.content_text}
               </p>
             )}
