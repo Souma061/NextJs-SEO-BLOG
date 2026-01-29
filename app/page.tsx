@@ -17,7 +17,7 @@ export default async function Home() {
     <main>
       <Header />
       <Hero />
-      <section className="py-16">
+      <section className="py-10">
         <BlogGrid blogs={data.blogs} />
       </section>
       <Footer />
